@@ -1,3 +1,11 @@
+from tkinter import *
+calculadora = Tk()
+calculadora.title("Calculadora de conversão de Base - Camila BSI1")
+
+pane = Frame(calculadora)
+pane.pack(fill = BOTH, expand= True)
+
+decimal_label = Label(calculadora, text="Decimal:")
 num = int(input('Digite valor inteiro '))
 #num vai pedir para a pessoa digitar um valor inteiro para que ele seja convertido para um número binario, octal ou hexadecimal
 print("Escolha um base para conversão ")
@@ -18,3 +26,4 @@ else:
 #bin,oct,hex são funções que já vem com a python.
 #os 2: são para pular duas casas depois da virgula.
 
+calculadora.mainloop()
