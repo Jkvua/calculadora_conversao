@@ -2,17 +2,17 @@ import tkinter as tk
 
 def converter():
     num = int(entry_num.get())
-    opcao = int(var_opcao.get())
-
+    opcao = int(entry_opcao.get())
+    
     if opcao == 1:
-        resultado = bin(num)[2:]
+        resultado = format(num ,bin(num)[2:])
     elif opcao == 2:
         resultado = oct(num)[2:]
     elif opcao == 3:
         resultado = hex(num)[2:]
     else:
         resultado = 'Opção inválida'
-
+    
     label_resultado.config(text="Resultado: " + resultado)
 
 calculadora = tk.Tk()
@@ -28,21 +28,14 @@ entry_num.pack()
 label_opcao = tk.Label(calculadora, text="Escolha uma base para conversão:")
 label_opcao.pack()
 
-var_opcao = tk.IntVar()
-
-radio_binario = tk.Radiobutton(calculadora, text="Binário", variable=var_opcao, value=1)
-radio_binario.pack()
-
-radio_octal = tk.Radiobutton(calculadora, text="Octal", variable=var_opcao, value=2)
-radio_octal.pack()
-
-radio_hexadecimal = tk.Radiobutton(calculadora, text="Hexadecimal", variable=var_opcao, value=3)
-radio_hexadecimal.pack()
+btn_button = tk.Button(text="Gerar QR Code", width=36, )
+entry_opcao = tk.Entry(calculadora)
+entry_opcao.pack()
 
 btn_converter = tk.Button(calculadora, text="Converter", command=converter)
 btn_converter.pack()
 
-label_resultado = tk.Label(calculadora, text= f" O resultado para a base escolhida é:")
+label_resultado = tk.Label(calculadora, text="Resultado:")
 label_resultado.pack()
 
 calculadora.mainloop()

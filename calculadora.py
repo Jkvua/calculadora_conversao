@@ -1,29 +1,47 @@
-from tkinter import *
-calculadora = Tk()
-calculadora.title("Calculadora de conversão de Base - Camila BSI1")
+import tkinter as tk
 
-pane = Frame(calculadora)
-pane.pack(fill = BOTH, expand= True)
+def converter():
+   num = int(entry_num.get())
+   opcao = int(var_opcao.get())
 
-decimal_label = Label(calculadora, text="Decimal:")
-num = int(input('Digite valor inteiro '))
-#num vai pedir para a pessoa digitar um valor inteiro para que ele seja convertido para um número binario, octal ou hexadecimal
-print("Escolha um base para conversão ")
-print('1: BINÁRIO '
-'2: OCTAL '
-'3: HEXADECIMAL ')
-#ao digitar o numero, tera que escolher para qual base decimal ira converter  
-opcao = int(input("Sua opção "))
-if opcao == 1:
-    print('{} para número BINÁRIO é {} '.format(num, bin(num)[2:]))
-elif opcao == 2:
-    print('{} para número OCTAL é {} ' .format(num, oct(num)[2:]))
-elif opcao == 3:
-    print('{} para número HEXADECIMAL é {} ' .format(num, hex(num)[2:]))
-else:
-    print('essa opção é invalida, tente novamente ')
-#if,elif e else são usados para converter o numero caso nao seja a opção 1 seja a 2 caso não seja será a 3 se não for nenhuma a opção é invalida
-#bin,oct,hex são funções que já vem com a python.
-#os 2: são para pular duas casas depois da virgula.
+   if opcao == 1:
+      resultado = bin(num)[2:]
+   elif opcao == 2:
+      resultado = oct(num)[2:]
+   elif opcao == 3:
+      resultado = hex(num)[2:]
+
+   label_resultado.config(text="Resultado: " + resultado)
+
+calculadora = tk.Tk()
+calculadora.title("Calculadora de conversão de Base -  Camila BSI1")
+calculadora.geometry("400x300")
+
+label_num = tk.Label(calculadora, text="Digite um valor inteiro:")
+label_num.pack()
+
+entry_num = tk.Entry(calculadora)
+entry_num.pack()
+
+label_opcao = tk.Label(calculadora, text="Escolha uma das bases para conversão:")
+label_opcao.pack()
+
+var_opcao = tk.IntVar()
+
+radio_binario = tk.Radiobutton(calculadora, text="Base Binária", variable=var_opcao, value=1)
+radio_binario.pack()
+
+radio_octal = tk.Radiobutton(calculadora, text="Base Octal", variable=var_opcao, value=2)
+radio_octal.pack()
+
+radio_hexadecimal = tk.Radiobutton(calculadora, text="Base Hexadecimal", variable=var_opcao, value=3)
+radio_hexadecimal.pack()
+
+btn_converter = tk.Button(calculadora, text="Converter", command=converter)
+btn_converter.pack()
+
+label_resultado = tk.Label(calculadora, text= f"O resultado para a base escolhida foi: ")
+label_resultado.pack()
 
 calculadora.mainloop()
+
