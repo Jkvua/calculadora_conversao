@@ -1,53 +1,52 @@
-from tkinter import *
+import tkinter as tk
 
-janela = Tk()
-janela.title("Calculadora de Conversão de Base")
-janela.mainloop()
+def converter():
+    numero = int(entry_numero.get())
+    opcao = int(var_opcao.get())
+    base_entrada = (entry_num())
+    base_saida = (entry_num())
 
-decimal_label = Label(janela, text="Decimal:")
-
-
-
-
-
-
+    numero = input("Digite o número a ser convertido: ")
+    base_entrada = int(input("Digite a base de entrada: "))
+    base_saida = int(input("Digite a base de saída: "))
 
 
-#def decimal_para_binario():
-    #decimal = int(decimal_entry.get())
-    #binario = bin(decimal)[2:]
-    #resultado_label.config(text="Binário: " + binario)
+def converter_base(numero, base_entrada, base_saida):
+    digitos_validos = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-#def binario_para_decimal():
-    #binario = binario_entry.get()
-    #decimal = int(binario, 2)
-    #resultado_label.config(text="Decimal: " + str(decimal))
+    # Verifica se a base de entrada é válida
+    if not 2 <= base_entrada <= 36:
+        return "Erro: A base de entrada deve estar entre 2 e 36."
 
-# Cria a janela principal
-#janela = Tk()
-#janela.title("Calculadora de Conversão de Base")
+    # Verifica se a base de saída é válida
+    if not 2 <= base_saida <= 36:
+        return "Erro: A base de saída deve estar entre 2 e 36."
 
-# Cria os elementos da interface
-#decimal_label = Label(janela, text="Decimal:")
-#decimal_entry = Entry(janela)
-#decimal_button = Button(janela, text="Converter para Binário", command=decimal_para_binario)
+    # Verifica se o número está em conformidade com a base de entrada
+    for digito in numero:
+        if digito not in digitos_validos[:base_entrada]:
+            return "Erro: O número não está em conformidade com a base de entrada escolhida."
 
-#binario_label = Label(janela, text="Binário:")
-#binario_entry = Entry(janela)
-#binario_button = Button(janela, text="Converter para Decimal", command=binario_para_decimal)
+    # Converte o número para base decimal
+    decimal = int(numero, base_entrada)
 
-#resultado_label = Label(janela, text="Resultado:")
+    # Converte o número da base decimal para a base de saída
+    resultado = ""
+    while decimal > 0:
+        resultado = digitos_validos[decimal % base_saida] + resultado
+        decimal //= base_saida
 
-# Posiciona os elementos na janela
-#decimal_label.grid(row=0, column=0, padx=10, pady=10)
-#decimal_entry.grid(row=0, column=1, padx=10, pady=10)
-#decimal_button.grid(row=0, column=2, padx=10, pady=10)
+    return resultado
 
-#binario_label.grid(row=1, column=0, padx=10, pady=10)
-#binario_entry.grid(row=1, column=1, padx=10, pady=10)
-#binario_button.grid(row=1, column=2, padx=10, pady=10)
+calculadora = tk.Tk()
+calculadora.title("Calculadora de conversão de base")
+calculadora.geometry("400x300")
 
-#resultado_label.grid(row=2, column=0, columnspan=3, padx=10, pady=10)
+label_numero = tk.Label(calculadora, text="Digite um número a ser convertido")
+label_numero.pack()
 
-# Inicia a interface
-#janela.mainloop()
+entry_numero = tk.Entry(calculadora)
+entry_numero.pack()
+
+resultado = converter_base(numero, base_entrada, base_saida)
+print("Resultado: ", resultado)

@@ -15,7 +15,7 @@ def converter():
 
 calculadora = tk.Tk()
 calculadora.title("Calculadora de conversão de Base -  Camila BSI1")
-calculadora.geometry("400x300")
+calculadora.geometry("600x300")
 
 label_num = tk.Label(calculadora, text="Digite um valor inteiro:")
 label_num.pack()
